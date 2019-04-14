@@ -1,5 +1,6 @@
 package com.studyinghome.order.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.studyinghome.order.request.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +18,18 @@ public class OrderController {
     @Autowired
     private UserService userService;
 
+
+    /**
+     * 使用注解形式的hystrix
+     * //@HystrixCommand(fallbackMethod = "error")
+     */
     @RequestMapping(value = "/order")
-    public String hello(){
+    public String hello() {
         return userService.hello();
+    }
+
+    private String error() {
+        return "REQUEST ERROR";
     }
 
 }
