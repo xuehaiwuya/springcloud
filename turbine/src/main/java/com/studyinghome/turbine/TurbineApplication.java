@@ -2,6 +2,8 @@ package com.studyinghome.turbine;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.cloud.netflix.turbine.EnableTurbine;
 /**
  * TurbineApplication
@@ -11,6 +13,7 @@ import org.springframework.cloud.netflix.turbine.EnableTurbine;
  * @create 2019/4/14 22:07
  */
 @SpringBootApplication
+@EnableHystrixDashboard
 @EnableTurbine
 public class TurbineApplication {
 

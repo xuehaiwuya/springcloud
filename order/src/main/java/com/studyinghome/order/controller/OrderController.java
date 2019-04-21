@@ -3,6 +3,7 @@ package com.studyinghome.order.controller;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.studyinghome.order.request.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +29,20 @@ public class OrderController {
         return userService.hello();
     }
 
-    private String error() {
+
+    @HystrixCommand(fallbackMethod = "error")
+    @RequestMapping(value = "/hello/{name}")
+    public String hi(@PathVariable("name") String name) {
+        return "hello  " + name;
+    }
+
+    /**
+     * fallbackMethod 的方法参数要和原方法参数一致，即error的方法和hi的方法参数一致，否则会报错
+     *
+     * @param name
+     * @return
+     */
+    public String error(String name) {
         return "REQUEST ERROR";
     }
 
